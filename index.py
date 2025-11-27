@@ -3,7 +3,7 @@ from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 from PIL import Image
 
-def logo_pdf_generator(imagem_path="your_logo.png", saida_pdf="labels.pdf"):
+def logo_pdf_generator(imagem_path="your_logo.png", exit_pdf="labels.pdf"):
     img = Image.open(imagem_path)
     px_por_cm = 118
     nova_dim = (int(4 * px_por_cm), int(4 * px_por_cm))
@@ -16,7 +16,7 @@ def logo_pdf_generator(imagem_path="your_logo.png", saida_pdf="labels.pdf"):
     margin = 1 * cm
     spacing = 0.5 * cm
 
-    c = canvas.Canvas(saida_pdf, pagesize=A4)
+    c = canvas.Canvas(exit_pdf, pagesize=A4)
 
     cols = int((page_width - 2 * margin + spacing) // (img_w + spacing))
     rows = int((page_height - 2 * margin + spacing) // (img_h + spacing))
@@ -31,7 +31,7 @@ def logo_pdf_generator(imagem_path="your_logo.png", saida_pdf="labels.pdf"):
             c.drawImage(temp_img, x, y, width=img_w, height=img_h)
 
     c.save()
-    print(f"✅ PDF gerado com sucesso: {saida_pdf}")
+    print(f"✅ PDF gerado com sucesso: {exit_pdf}")
     print(f"📄 {cols * rows} fotos 4x4 por página.")
 
 if __name__ == "__main__":
